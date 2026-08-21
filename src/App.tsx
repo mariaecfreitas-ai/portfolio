@@ -1,6 +1,8 @@
 import { motion, AnimatePresence } from "motion/react";
-import { ArrowUpRight, ArrowRight, ArrowLeft } from "lucide-react";
+import { ArrowUpRight, ArrowRight, ArrowLeft, Github, ExternalLink } from "lucide-react";
 import { useState } from "react";
+import red1000GradeImg from "./assets/images/red1000_grade_1787142640673.jpg";
+import profileMariaImg from "./assets/images/profile_maria.jpg";
 
 // Types for the application views
 type ViewState = "home" | "materias" | "subjectDetail";
@@ -13,6 +15,7 @@ interface Activity {
   docLink?: string;
   embedUrl?: string;
   links?: { label: string; url: string }[];
+  hideEmbed?: boolean;
 }
 
 interface Materia {
@@ -22,6 +25,9 @@ interface Materia {
   desc: string;
   fullContent?: string;
   activities?: Activity[];
+  activitiesByTrimestre?: {
+    [trimestre: number]: Activity[];
+  };
 }
 
 export default function App() {
@@ -80,7 +86,55 @@ export default function App() {
           docLink: "https://imgur.com/a/ObrdbjR",
           embedUrl: "https://imgur.com/a/ObrdbjR/embed?pub=true"
         }
-      ]
+      ],
+      activitiesByTrimestre: {
+        1: [
+          {
+            title: "A Grande Guerra (30/03)",
+            whatWasDone: "Abordagem sobre a Primeira Guerra Mundial, analisando causas, consequências e impactos globais, além das relações políticas e sociais do período.",
+            learning: "\" C3 - H15, H16, H20 - C6 - H39 \"",
+            docLink: "https://www.canva.com/design/DAHFn4COv9E/njH3qukCDKxKDlCfHna4nw/view",
+            embedUrl: "https://www.canva.com/design/DAHFn4COv9E/njH3qukCDKxKDlCfHna4nw/view?embed"
+          },
+          {
+            title: "Análise de País: Espanha",
+            whatWasDone: "Trabalhei em dupla na elaboração de uma apresentação sobre um país escolhido, com o objetivo de estudar suas características e entender sua realidade geopolítica. A atividade incluiu a pesquisa de informações confiáveis sobre aspectos como cultura, economia, geografia e organização social, além da produção de slides para apresentação em sala de aula. Esse trabalho ajudou a ampliar a compreensão sobre as diferenças entre os países e a perceber melhor como fatores históricos, políticos e econômicos influenciam cada nação.",
+            learning: "\" Habilidade C1, Habilidade H1, Habilidade H2, Habilidade H3, Habilidade H4, Habilidade H5 \"",
+            docLink: "https://www.canva.com/design/DAHB2zdFpyA/kbiZ6kS8NNTSrVSUeIgdCg/view",
+            embedUrl: "https://www.canva.com/design/DAHB2zdFpyA/kbiZ6kS8NNTSrVSUeIgdCg/view?embed"
+          },
+          {
+            title: "Propaganda Soviética (1914–1945)",
+            whatWasDone: "Nessa atividade, fiz a análise de um cartaz de propaganda soviética (1914–1945) e produzi uma versão no Canva com a imagem e sua interpretação. Expliquei os símbolos presentes, o uso das cores, a tradução do texto, os elementos artísticos e o contexto histórico da época. O objetivo foi compreender como a arte era utilizada como instrumento de propaganda.",
+            learning: "\" Habilidade C2 - H8, Habilidade H10, Habilidade H12 \"",
+            docLink: "https://imgur.com/a/ObrdbjR",
+            embedUrl: "https://imgur.com/a/ObrdbjR/embed?pub=true"
+          }
+        ],
+        2: [
+          {
+            title: "Cinema e Totalitarismo.",
+            whatWasDone: "A atividade teve como objetivo entender como filmes podem mostrar características dos regimes totalitários, como propaganda, censura, repressão e manipulação das pessoas. Achei interessante porque percebi que filmes e séries podem ajudar a entender melhor a História e refletir sobre como o poder e o controle podem ser usados na sociedade.",
+            learning: "\" Habilidades: H10, H22, H26, H27. \"",
+            docLink: "https://www.canva.com/design/DAHJuvem2lo/WxZgx-ZsR3cp8c770fbuQQ/view",
+            embedUrl: "https://www.canva.com/design/DAHJuvem2lo/WxZgx-ZsR3cp8c770fbuQQ/view?embed"
+          },
+          {
+            title: "SÍNTESE DA 2ª GUERRA MUNDIAL",
+            whatWasDone: "A atividade teve como objetivo pesquisar sobre o Fascismo Italiano e entender seu contexto, suas principais características e seus impactos na História. Também foi necessário analisar uma fonte histórica da época para compreender como o fascismo era visto e representado naquele período. Achei interessante porque pude conhecer melhor esse acontecimento e entender suas consequências para a sociedade.",
+            learning: "\" Não estava indicado \"",
+            docLink: "https://www.canva.com/design/DAHOU1vcdOA/qSN4YEEA1e_q-mhBIFkxkQ/view",
+            embedUrl: "https://www.canva.com/design/DAHOU1vcdOA/qSN4YEEA1e_q-mhBIFkxkQ/view?embed"
+          },
+          {
+            title: "Crise de 1929",
+            whatWasDone: "A atividade teve como objetivo entender a Crise de 1929 e seus impactos nos Estados Unidos, Brasil e Europa, além de conhecer outras crises econômicas. Foram pesquisadas as causas, consequências e medidas tomadas pelos governos para enfrentar essas crises. Também foi feito um quadro comparativo entre três crises. Achei interessante porque pude entender melhor como as crises econômicas acontecem e como podem afetar a sociedade.",
+            learning: "\" C4 - H21, H22, H23 \"",
+            docLink: "https://docs.google.com/spreadsheets/d/1wqLPYKbon0ExbxJ_DSNC-qcjy2lsrJ865xTbmio26lY/edit?usp=sharing",
+            embedUrl: "https://docs.google.com/spreadsheets/d/1wqLPYKbon0ExbxJ_DSNC-qcjy2lsrJ865xTbmio26lY/preview"
+          }
+        ]
+      }
     },
     { 
       id: "linguagens", 
@@ -103,7 +157,50 @@ export default function App() {
           docLink: "https://www.canva.com/design/DAHCO4c9Zbw/0iXQbzjtIetcwFiNrq0E7g/view",
           embedUrl: "https://www.canva.com/design/DAHCO4c9Zbw/0iXQbzjtIetcwFiNrq0E7g/view?embed"
         }
-      ]
+      ],
+      activitiesByTrimestre: {
+        1: [
+          {
+            title: "Trabalho: Explicar GH: entre o corpo e a sociedade",
+            whatWasDone: "Análise da experiência da personagem G.H., discutindo interpretações mais científicas em comparação com interpretações sociais.",
+            learning: "\" Habilidades Avaliadas: H4 e H22 \"",
+            docLink: "https://www.canva.com/design/DAHFntsq5aQ/FPh5wUPXeWU8LwBjqxRw2w/view",
+            embedUrl: "https://www.canva.com/design/DAHFntsq5aQ/FPh5wUPXeWU8LwBjqxRw2w/view?embed"
+          },
+          {
+            title: "Jogo literário – As origens ao Simbolismo",
+            whatWasDone: "Atividade interativa para revisar os movimentos literários de um jeito mais dinâmico.",
+            learning: "\" Habilidades: H4 / H14 \"",
+            docLink: "https://www.canva.com/design/DAHCO4c9Zbw/0iXQbzjtIetcwFiNrq0E7g/view",
+            embedUrl: "https://www.canva.com/design/DAHCO4c9Zbw/0iXQbzjtIetcwFiNrq0E7g/view?embed"
+          }
+        ],
+        2: [
+          {
+            title: "Aplicação do RED1000 (Redação)",
+            whatWasDone: "A atividade teve como objetivo produzir uma redação no modelo ENEM sobre os perigos do autodiagnóstico de transtornos mentais nas redes sociais no Brasil. Primeiro, foi feito o texto à mão e, depois, ele foi digitado na plataforma Red1000. Achei importante porque o tema ajuda a refletir sobre os riscos de buscar informações sobre saúde mental na internet e tirar conclusões sem a ajuda de um profissional.",
+            learning: "\" Não estava indicado \"",
+            imageUrl: red1000GradeImg
+          },
+          {
+            title: "Videomanifesto",
+            whatWasDone: "A atividade teve como objetivo criar um videomanifesto inspirado nos manifestos modernistas, abordando um tema atual de forma crítica e criativa. Foi necessário escolher o tema, criar um roteiro e produzir um vídeo com imagens, narração, música, edição e frases de impacto. Achei interessante porque pude usar a criatividade para expressar minhas ideias de uma forma diferente.",
+            learning: "\" Habilidades: H3 \"",
+            docLink: "https://drive.google.com/file/d/1wipWwzCDVOqWIW8Livtu4FQZh_DJ5UWI/view?usp=sharing",
+            embedUrl: "https://drive.google.com/file/d/1wipWwzCDVOqWIW8Livtu4FQZh_DJ5UWI/preview",
+            links: [
+              { label: "ASSISTIR VÍDEO NO DRIVE", url: "https://drive.google.com/file/d/1wipWwzCDVOqWIW8Livtu4FQZh_DJ5UWI/view?usp=sharing" }
+            ]
+          },
+          {
+            title: "Que tipo de arte você consome?",
+            whatWasDone: "A atividade teve como objetivo fazer uma apresentação em inglês sobre meu artista, filme e música favoritos. Foi uma forma de praticar a língua inglesa enquanto falava sobre assuntos que gosto e fazem parte do meu dia a dia. Achei interessante porque pude melhorar meu vocabulário, minha escrita e também expressar minhas opiniões em inglês.",
+            learning: "\" Habilidade: H25 \"",
+            docLink: "https://docs.google.com/document/d/1a-zmErNSD4c3Yd9beUBChREi18cMUBkazNDHwU_It-4/edit?usp=sharing",
+            embedUrl: "https://docs.google.com/document/d/1a-zmErNSD4c3Yd9beUBChREi18cMUBkazNDHwU_It-4/preview"
+          }
+        ]
+      }
     },
     { 
       id: "matematica", 
@@ -126,7 +223,34 @@ export default function App() {
           docLink: "https://docs.google.com/document/d/1bdiTsvQ371NM4nJ9c6X2LIq3ytin9giUb8ArryWHH0k/edit?usp=sharing",
           embedUrl: "https://docs.google.com/document/d/1bdiTsvQ371NM4nJ9c6X2LIq3ytin9giUb8ArryWHH0k/preview"
         }
-      ]
+      ],
+      activitiesByTrimestre: {
+        1: [
+          {
+            title: "Atividade 1: Filme Quebrando a Banca",
+            whatWasDone: "Análise de como a probabilidade e a contagem de cartas são usadas no filme.",
+            learning: "\" C5: Aplicar o pensamento probabilístico. | H30: identificar dados. | H31: Reconhecer especificidades (aleatórios e probabilidades). \"",
+            docLink: "https://docs.google.com/document/d/1AEoBMkmHtX5yhiajaunGKYKGZu5K__eBiYMw2IYBkI8/edit?usp=sharing",
+            embedUrl: "https://docs.google.com/document/d/1AEoBMkmHtX5yhiajaunGKYKGZu5K__eBiYMw2IYBkI8/preview"
+          },
+          {
+            title: "AV1 – Jogo Quebrando a Banca",
+            whatWasDone: "Aplicação prática de probabilidade e tomada de decisões por meio de um jogo.",
+            learning: "\" Competências e Habilidades: C5, H30, H31 \"",
+            docLink: "https://docs.google.com/document/d/1bdiTsvQ371NM4nJ9c6X2LIq3ytin9giUb8ArryWHH0k/edit?usp=sharing",
+            embedUrl: "https://docs.google.com/document/d/1bdiTsvQ371NM4nJ9c6X2LIq3ytin9giUb8ArryWHH0k/preview"
+          }
+        ],
+        2: [
+          {
+            title: "Apresentação Estatística",
+            whatWasDone: "A atividade mostrou como a Estatística pode ser usada para analisar os hábitos dos estudantes. Foram coletados e organizados dados em tabelas e gráficos, além de cálculos como média, moda e mediana. Achei interessante porque aprendi a interpretar melhor os resultados e perceber como a Estatística está presente no nosso dia a dia.",
+            learning: "\" Habilidades: C4 – H27, H28 e H29 \"",
+            docLink: "https://www.canva.com/design/DAHNqvYC59A/0i6evX9GN_ZrP3SEKim3bw/view",
+            embedUrl: "https://www.canva.com/design/DAHNqvYC59A/0i6evX9GN_ZrP3SEKim3bw/view?embed"
+          }
+        ]
+      }
     },
     { 
       id: "natureza", 
@@ -156,7 +280,57 @@ export default function App() {
           docLink: "https://docs.google.com/document/d/1hvU4PLJHbdDxMyleR_XdRKtMGapP4Qb-57PH-PyXZHk/edit?usp=sharing",
           embedUrl: "https://docs.google.com/document/d/1hvU4PLJHbdDxMyleR_XdRKtMGapP4Qb-57PH-PyXZHk/preview"
         }
-      ]
+      ],
+      activitiesByTrimestre: {
+        1: [
+          {
+            title: "Meme sobre Evolucionismo",
+            whatWasDone: "Produção de um meme usando conceitos de seleção natural e adaptação.",
+            learning: "\" C3 - Determinar impactos humanos. | H15 - Comparar intervenção ambiental. | H18 - identificar risco ambiental. \"",
+            docLink: "https://docs.google.com/document/d/1ICYg3IjhJuKJiPqgwSqgPcA70DfJm5AD8CoxlO7ukKc/edit?usp=sharing",
+            embedUrl: "https://docs.google.com/document/d/1ICYg3IjhJuKJiPqgwSqgPcA70DfJm5AD8CoxlO7ukKc/preview"
+          },
+          {
+            title: "Apresentação – Combustíveis Fósseis",
+            whatWasDone: "Estudo dos impactos e das razões econômicas do uso constante de combustíveis fósseis.",
+            learning: "\" C1, H1, C2, H9, H11 \"",
+            docLink: "https://www.canva.com/design/DAHH_HkoDGU/sr4motR45mmNERImtPOP2A/view",
+            embedUrl: "https://www.canva.com/design/DAHH_HkoDGU/sr4motR45mmNERImtPOP2A/view?embed"
+          },
+          {
+            title: "Relatório: Eletricidade por atrito",
+            whatWasDone: "Atividade prática envolvendo a transferência de elétrons.",
+            learning: "\" C1, H1, C2, H7, H9, H11, H12 \"",
+            docLink: "https://docs.google.com/document/d/1hvU4PLJHbdDxMyleR_XdRKtMGapP4Qb-57PH-PyXZHk/edit?usp=sharing",
+            embedUrl: "https://docs.google.com/document/d/1hvU4PLJHbdDxMyleR_XdRKtMGapP4Qb-57PH-PyXZHk/preview"
+          }
+        ],
+        2: [
+          {
+            title: "Mural interativo",
+            whatWasDone: "Nesta atividade em grupo, usamos nossos conhecimentos científicos para montar uma exposição interativa sobre como o meio ambiente pode afetar a saúde das pessoas. Fizemos pesquisas, analisamos informações e produzimos materiais visuais para criar um mural científico. O objetivo foi informar e conscientizar a comunidade escolar sobre os problemas ambientais e a importância de cuidar da saúde, tanto individual quanto coletiva. O registro fotográfico não foi realizado no dia da atividade porque não tivemos autorização do professor.",
+            learning: "\" C2, C3, H18, C4, H11, H15, H23 \""
+          },
+          {
+            title: "Seminário sobre Estequiometria na Indústria.",
+            whatWasDone: "Durante o seminário e a prática em laboratório, realizamos experimentos variando alguns parâmetros para observar como eles influenciavam o fenômeno estudado e sua aplicação na indústria. Também utilizamos instrumentos, como o multímetro, para fazer medições e analisar os resultados. Todo o processo foi registrado por meio de relatórios técnicos e vídeos, mostrando na prática os conceitos aprendidos nas Ciências da Natureza.",
+            learning: "\" C2, H6, H7, H9 \"",
+            docLink: "https://docs.google.com/document/d/1x3mywswhE9oKOEebzDW4ZGyLI3va76gfgyk6tQQup-Y/edit?usp=sharing",
+            embedUrl: "https://docs.google.com/document/d/1x3mywswhE9oKOEebzDW4ZGyLI3va76gfgyk6tQQup-Y/preview",
+            links: [
+              { label: "ABRIR DOCUMENTO", url: "https://docs.google.com/document/d/1x3mywswhE9oKOEebzDW4ZGyLI3va76gfgyk6tQQup-Y/edit?usp=sharing" },
+              { label: "ASSISTIR VÍDEO", url: "https://drive.google.com/file/d/1zURyZQkU50IgIAwLtCdXNCOOcRXZSmgn/view?usp=sharing" }
+            ]
+          },
+          {
+            title: "CARTILHA ELETRICIDADE E O CORPO HUMANO",
+            whatWasDone: "Nessa atividade, pesquisamos sobre a relação entre a corrente elétrica e o corpo humano, aprendendo sobre os riscos de choques elétricos e também sobre o uso da eletricidade na área da saúde, como em exames e tratamentos. Além disso, estudamos formas de evitar acidentes e os principais cuidados de segurança. Em grupo, produzimos uma cartilha ilustrada com informações simples e fáceis de entender, voltada para o público em geral.",
+            learning: "\" C1, H3, H4, C2, H12, C4, H23. \"",
+            docLink: "https://www.canva.com/design/DAHS8zkpYd8/vj_eBU5keHmncrTTcy5jSQ/view?utm_content=DAHS8zkpYd8&utm_campaign=designshare&utm_medium=embeds&utm_source=link",
+            embedUrl: "https://www.canva.com/design/DAHS8zkpYd8/vj_eBU5keHmncrTTcy5jSQ/view?embed"
+          }
+        ]
+      }
     },
     { 
       id: "modelagem", 
@@ -201,7 +375,31 @@ export default function App() {
           docLink: "https://docs.google.com/document/d/1E8mePkIMH_cdW266XRYMSOWGvr6yCQ_mpjWyMWpsaKc/edit?usp=sharing",
           embedUrl: "https://docs.google.com/document/d/1E8mePkIMH_cdW266XRYMSOWGvr6yCQ_mpjWyMWpsaKc/preview"
         }
-      ]
+      ],
+      activitiesByTrimestre: {
+        1: [
+          {
+            title: "Grande Prêmio SENAI de Inovação 2026",
+            whatWasDone: "O Grande Prêmio SENAI de Inovação 2026 é uma competição na qual os estudantes organizam equipes (escuderias) para desenvolver soluções criativas para desafios reais da indústria. O evento ocorre de forma online e inclui fases como inscrição, formação dos grupos, criação das ideias e apresentação dos projetos.",
+            learning: "\"Trabalho em equipe, inovação, criatividade e uso de tecnologia na indústria.\"",
+            docLink: "https://docs.google.com/document/d/1E8mePkIMH_cdW266XRYMSOWGvr6yCQ_mpjWyMWpsaKc/edit?usp=sharing",
+            embedUrl: "https://docs.google.com/document/d/1E8mePkIMH_cdW266XRYMSOWGvr6yCQ_mpjWyMWpsaKc/preview"
+          }
+        ],
+        2: [
+          {
+            title: "Controle de LED com Botão no Arduino",
+            whatWasDone: "Nesta atividade, fizemos um circuito usando Arduino, um botão e um LED. Quando o botão é pressionado, o LED acende. Com esse projeto, conseguimos colocar em prática conceitos de programação e eletrônica, aprendendo como o Arduino recebe informações pelo botão e usa esses dados para controlar o LED.",
+            learning: "\" Habilidade: Programação de microcontroladores | Habilidade: Entradas e saídas digitais | Habilidade: Circuitos Eletrônicos \"",
+            imageUrl: "https://lh3.googleusercontent.com/d/1hu-IUAc70_3bm21UtCwn-47ymEMkNOML",
+            docLink: "https://drive.google.com/file/d/1hu-IUAc70_3bm21UtCwn-47ymEMkNOML/view?usp=sharing",
+            embedUrl: "https://drive.google.com/file/d/1hu-IUAc70_3bm21UtCwn-47ymEMkNOML/preview",
+            links: [
+              { label: "VER FOTO NO DRIVE", url: "https://drive.google.com/file/d/1hu-IUAc70_3bm21UtCwn-47ymEMkNOML/view?usp=sharing" }
+            ]
+          }
+        ]
+      }
     },
     { 
       id: "desenvolvimento", 
@@ -216,7 +414,50 @@ export default function App() {
           docLink: "https://docs.google.com/document/d/1E8mePkIMH_cdW266XRYMSOWGvr6yCQ_mpjWyMWpsaKc/edit?usp=sharing",
           embedUrl: "https://docs.google.com/document/d/1E8mePkIMH_cdW266XRYMSOWGvr6yCQ_mpjWyMWpsaKc/preview"
         }
-      ]
+      ],
+      activitiesByTrimestre: {
+        1: [
+          {
+            title: "Grande Prêmio SENAI de Inovação 2026",
+            whatWasDone: "O Grande Prêmio SENAI de Inovação 2026 é uma competição na qual os estudantes organizam equipes (escuderias) para desenvolver soluções criativas para desafios reais da indústria. O evento ocorre de forma online e inclui fases como inscrição, formação dos grupos, criação das ideias e apresentação dos projetos.",
+            learning: "\"Trabalho em equipe, inovação, criatividade e uso de tecnologia na indústria.\"",
+            docLink: "https://docs.google.com/document/d/1E8mePkIMH_cdW266XRYMSOWGvr6yCQ_mpjWyMWpsaKc/edit?usp=sharing",
+            embedUrl: "https://docs.google.com/document/d/1E8mePkIMH_cdW266XRYMSOWGvr6yCQ_mpjWyMWpsaKc/preview"
+          }
+        ],
+        2: [
+          {
+            title: "Desenvolvimento de um Sistema de Gateway de Pagamento – BP Promotora de...",
+            whatWasDone: "A atividade teve como objetivo desenvolver um sistema de gateway de pagamento usando uma API. O projeto foi criado para receber e processar pagamentos de forma organizada e segura, utilizando programação e tecnologias de backend. Achei interessante porque pude entender melhor como funciona um sistema de pagamentos e como diferentes serviços podem se comunicar.",
+            learning: "\"(BRANCH: LOGS-PAY) | H1 – Reconhecer requisitos de qualidade, integridade, usabilidade e segurança da informação. | H4 – Selecionar linguagem de programação de acordo com os requisitos. | H6 – Aplicar linguagem de programação por meio de APIs, bibliotecas e frameworks na construção de rotinas de software. | Proposta: Desenvolvimento de um sistema de gateway de pagamento para a BP – Promotora de Crédito, com o objetivo de criar uma solução capaz de intermediar e gerenciar operações de pagamento de forma organizada, segura e eficiente.\"",
+            docLink: "https://github.com/fullzer4/RinhaSenai2026FullStack",
+            links: [
+              { label: "REPOSITÓRIO NO GITHUB", url: "https://github.com/fullzer4/RinhaSenai2026FullStack" }
+            ]
+          }
+        ]
+      }
+    },
+    { 
+      id: "programacao-aplicativos", 
+      area: "TÉCNICO", 
+      title: "Programação de Aplicativos", 
+      desc: "Desenvolvimento de aplicativos móveis e soluções interativas integrando lógica de software e design de interfaces.",
+      activities: [],
+      activitiesByTrimestre: {
+        1: [],
+        2: [
+          {
+            title: "Desenvolvimento de um Sistema de Gateway de Pagamento – BP Promotora de...",
+            whatWasDone: "A atividade teve como objetivo desenvolver um sistema de gateway de pagamento usando uma API. O projeto foi criado para receber e processar pagamentos de forma organizada e segura, utilizando programação e tecnologias de backend. Achei interessante porque pude entender melhor como funciona um sistema de pagamentos e como diferentes serviços podem se comunicar.",
+            learning: "\"(BRANCH: LOGS-PAY) | H1 – Reconhecer requisitos de qualidade, integridade, usabilidade e segurança da informação. | H4 – Selecionar linguagem de programação de acordo com os requisitos. | H6 – Aplicar linguagem de programação por meio de APIs, bibliotecas e frameworks na construção de rotinas de software. | Proposta: Desenvolvimento de um sistema de gateway de pagamento para a BP – Promotora de Crédito, com o objetivo de criar uma solução capaz de intermediar e gerenciar operações de pagamento de forma organizada, segura e eficiente.\"",
+            docLink: "https://github.com/fullzer4/RinhaSenai2026FullStack",
+            links: [
+              { label: "REPOSITÓRIO NO GITHUB", url: "https://github.com/fullzer4/RinhaSenai2026FullStack" }
+            ]
+          }
+        ]
+      }
     },
   ];
 
@@ -333,14 +574,15 @@ export default function App() {
                   <div className="w-full lg:w-2/5 flex justify-center">
                     <motion.div 
                       variants={itemVariants}
-                      whileHover={{ scale: 1.05 }}
-                      className="w-64 md:w-80 aspect-[3/4] border-2 border-brand-line shadow-2xl bg-white overflow-hidden z-20 transition-all hover:shadow-2xl cursor-pointer"
+                      whileHover={{ scale: 1.03 }}
+                      className="w-64 md:w-80 aspect-[3/4] border-2 border-brand-line shadow-2xl bg-white overflow-hidden z-20 transition-all hover:shadow-2xl cursor-pointer relative group"
                     >
-                      <iframe 
-                        src="https://imgur.com/a/FOZ1pSD/embed?pub=true" 
-                        className="w-full h-full border-none scale-[2.2] origin-center"
-                        allowFullScreen
+                      <img 
+                        src={profileMariaImg} 
+                        alt="Maria Eduarda Ciquelero de Freitas" 
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                         loading="lazy"
+                        referrerPolicy="no-referrer"
                       />
                     </motion.div>
                   </div>
@@ -528,102 +770,135 @@ export default function App() {
               </div>
 
               {/* Activity Cards Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mt-12">
-                {activeTrimestre === 1 && selectedMateria.activities?.map((activity, idx) => (
-                  <motion.div
-                    key={idx}
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: idx * 0.1 }}
-                    className="bg-white border-b-4 border-r-4 border-brand-line/40 flex flex-col h-full group transition-all duration-300"
-                  >
-                    {/* Activity Image or Embed */}
-                    {!activity.hideEmbed && (
-                      <div className="aspect-video bg-white border-b border-brand-line/20 relative overflow-hidden m-4">
-                        {activity.imageUrl ? (
-                          <img 
-                            src={activity.imageUrl} 
-                            className="w-full h-full object-contain" 
-                            referrerPolicy="no-referrer"
-                            alt={activity.title}
-                          />
-                        ) : activity.embedUrl ? (
-                          <iframe 
-                            src={activity.embedUrl} 
-                            className="w-full h-full border-none"
-                            allowFullScreen
-                            loading="lazy"
-                          />
-                        ) : (
-                          <div className="absolute inset-0 flex items-center justify-center p-4">
-                             <div className="w-full h-full border border-brand-line/40 flex flex-col items-center justify-center bg-brand-bg/10">
-                                <span className="text-[10px] italic font-serif opacity-30">[ Imagem da Atividade ]</span>
-                             </div>
+              {(() => {
+                const currentActivities = selectedMateria.activitiesByTrimestre?.[activeTrimestre] || 
+                  (activeTrimestre === 1 ? (selectedMateria.activities || []) : []);
+
+                return (
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mt-12">
+                    {currentActivities.map((activity, idx) => (
+                      <motion.div
+                        key={idx}
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: idx * 0.1 }}
+                        className="bg-white border-b-4 border-r-4 border-brand-line/40 flex flex-col h-full group transition-all duration-300"
+                      >
+                        {/* Activity Image or Embed */}
+                        {!activity.hideEmbed && (
+                          <div className="aspect-video bg-white border-b border-brand-line/20 relative overflow-hidden m-4">
+                            {activity.imageUrl ? (
+                              <img 
+                                src={activity.imageUrl} 
+                                className="w-full h-full object-contain" 
+                                referrerPolicy="no-referrer"
+                                alt={activity.title}
+                              />
+                            ) : activity.embedUrl ? (
+                              <iframe 
+                                src={activity.embedUrl} 
+                                className="w-full h-full border-none"
+                                allowFullScreen
+                                loading="lazy"
+                              />
+                            ) : activity.docLink ? (
+                              <a 
+                                href={activity.docLink}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="w-full h-full border border-brand-line/30 flex flex-col items-center justify-center bg-brand-bg/30 p-6 text-center group/imglink hover:bg-brand-primary hover:text-white transition-all cursor-pointer"
+                              >
+                                <div className="p-3.5 bg-white border border-brand-line/30 mb-2.5 rounded shadow-sm text-brand-text group-hover/imglink:border-white transition-all">
+                                  {activity.docLink.includes("github.com") ? (
+                                    <Github className="w-7 h-7" />
+                                  ) : (
+                                    <ExternalLink className="w-7 h-7" />
+                                  )}
+                                </div>
+                                <span className="text-[11px] font-extrabold tracking-widest uppercase mb-1 flex items-center gap-1.5">
+                                  {activity.docLink.includes("github.com") ? "Acessar Repositório GitHub" : "Abrir Link da Atividade"}
+                                  <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover/imglink:translate-x-1 group-hover/imglink:-translate-y-1" />
+                                </span>
+                                <span className="text-[9px] opacity-60 font-mono truncate max-w-[240px]">
+                                  {activity.docLink.replace(/^https?:\/\//, '')}
+                                </span>
+                              </a>
+                            ) : (
+                              <div className="absolute inset-0 flex items-center justify-center p-4">
+                                 <div className="w-full h-full border border-brand-line/40 flex flex-col items-center justify-center bg-brand-bg/10">
+                                    <span className="text-[10px] italic font-serif opacity-30">[ Imagem da Atividade ]</span>
+                                 </div>
+                              </div>
+                            )}
                           </div>
                         )}
+
+                        <div className="px-8 pb-10 pt-8 flex flex-col flex-grow text-left">
+                          <h3 className="font-serif text-3xl md:text-4xl mb-10 leading-tight">
+                            {activity.title}
+                          </h3>
+
+                          <div className="space-y-10 flex-grow">
+                            <div>
+                              <p className="text-[9px] tracking-[0.2em] font-bold uppercase text-brand-text/50 mb-4">O QUE FOI FEITO</p>
+                              <p className="text-base font-light leading-relaxed opacity-90">
+                                {activity.whatWasDone}
+                              </p>
+                            </div>
+
+                            <div className="pt-6 border-t border-brand-line/10">
+                              <p className="text-[9px] tracking-[0.2em] font-bold uppercase text-brand-text/50 mb-4">APRENDIZADO</p>
+                              <p className="text-base italic font-serif leading-relaxed opacity-90">
+                                {activity.learning}
+                              </p>
+                            </div>
+                          </div>
+
+                          {activity.links ? (
+                            <div className="mt-12 flex flex-wrap gap-4 pb-2">
+                              {activity.links.map((link, lIdx) => (
+                                <a 
+                                  key={lIdx}
+                                  href={link.url}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="group/link flex items-center gap-2 text-[10px] tracking-extrawide font-extrabold uppercase text-brand-text border-b-2 border-brand-text pb-1 hover:gap-4 transition-all whitespace-nowrap"
+                                >
+                                  {link.label} <ArrowUpRight className="w-3 h-3 transition-transform group-hover/link:translate-x-1 group-hover/link:-translate-y-1" />
+                                </a>
+                              ))}
+                            </div>
+                          ) : (
+                            activity.docLink && (
+                              <a 
+                                href={activity.docLink}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="mt-12 flex items-center gap-3 text-[10px] tracking-[0.2em] font-extrabold uppercase text-brand-text hover:gap-5 transition-all group/link"
+                              >
+                                ABRIR DOCUMENTO <ArrowUpRight className="w-4 h-4 transition-transform group-hover/link:translate-x-1 group-hover/link:-translate-y-1" />
+                              </a>
+                            )
+                          )}
+                        </div>
+                      </motion.div>
+                    ))}
+                    
+                    {/* Empty State message if current trimester is empty */}
+                    {currentActivities.length === 0 && (
+                      <div className="col-span-full py-32 text-center border-2 border-dashed border-brand-line/20 bg-white/10">
+                        <motion.p 
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          className="font-serif text-3xl italic text-brand-text/60"
+                        >
+                          Ainda não tem atividades
+                        </motion.p>
                       </div>
                     )}
-
-                    <div className="px-8 pb-10 pt-8 flex flex-col flex-grow text-left">
-                      <h3 className="font-serif text-3xl md:text-4xl mb-10 leading-tight">
-                        {activity.title}
-                      </h3>
-
-                      <div className="space-y-10 flex-grow">
-                        <div>
-                          <p className="text-[9px] tracking-[0.2em] font-bold uppercase text-brand-text/50 mb-4">O QUE FOI FEITO</p>
-                          <p className="text-base font-light leading-relaxed opacity-90">
-                            {activity.whatWasDone}
-                          </p>
-                        </div>
-
-                        <div className="pt-6 border-t border-brand-line/10">
-                          <p className="text-[9px] tracking-[0.2em] font-bold uppercase text-brand-text/50 mb-4">APRENDIZADO</p>
-                          <p className="text-base italic font-serif leading-relaxed opacity-90">
-                            {activity.learning}
-                          </p>
-                        </div>
-                      </div>
-
-                      {activity.links ? (
-                        <div className="mt-12 flex gap-4 overflow-x-auto pb-2 scrollbar-none">
-                          {activity.links.map((link, lIdx) => (
-                            <a 
-                              key={lIdx}
-                              href={link.url}
-                              className="group/link flex items-center gap-2 text-[10px] tracking-extrawide font-extrabold uppercase text-brand-text border-b-2 border-brand-text pb-1 hover:gap-4 transition-all whitespace-nowrap"
-                            >
-                              {link.label} <ArrowUpRight className="w-3 h-3 transition-transform group-hover/link:translate-x-1 group-hover/link:-translate-y-1" />
-                            </a>
-                          ))}
-                        </div>
-                      ) : (
-                        activity.docLink && (
-                          <a 
-                            href={activity.docLink}
-                            className="mt-12 flex items-center gap-3 text-[10px] tracking-[0.2em] font-extrabold uppercase text-brand-text hover:gap-5 transition-all group/link"
-                          >
-                            ABRIR DOCUMENTO <ArrowUpRight className="w-4 h-4 transition-transform group-hover/link:translate-x-1 group-hover/link:-translate-y-1" />
-                          </a>
-                        )
-                      )}
-                    </div>
-                  </motion.div>
-                ))}
-                
-                {/* Empty State message for 2nd and 3rd trimestre or if 1st is empty */}
-                {(activeTrimestre > 1 || (activeTrimestre === 1 && (!selectedMateria.activities || selectedMateria.activities.length === 0))) && (
-                  <div className="col-span-full py-32 text-center border-2 border-dashed border-brand-line/20 bg-white/10">
-                    <motion.p 
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      className="font-serif text-3xl italic text-brand-text/60"
-                    >
-                      Ainda não tem atividades
-                    </motion.p>
                   </div>
-                )}
-              </div>
+                );
+              })()}
             </motion.div>
           )}
         </AnimatePresence>
